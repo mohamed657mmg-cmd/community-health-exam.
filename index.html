@@ -1,12 +1,14 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>اختبار</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
@@ -15,147 +17,604 @@ body{
   min-height:100vh;
   padding:20px;
 }
+
 .container{
   max-width:750px;
   margin:30px auto;
-  background:#ffffff;
+  background:#fff;
   color:#152338;
   border-radius:22px;
   padding:25px;
   box-shadow:0 15px 50px #0005;
 }
-h1{text-align:center;color:#123b5d}
-.welcome{text-align:center;line-height:1.9}
+
+h1{
+  text-align:center;
+  color:#123b5d;
+}
+
+.welcome{
+  text-align:center;
+  line-height:1.9;
+}
+
 input{
-  width:100%;padding:15px;border:1px solid #ccd5df;
-  border-radius:12px;font-size:17px;margin:12px 0;
+  width:100%;
+  padding:15px;
+  border:1px solid #ccd5df;
+  border-radius:12px;
+  font-size:17px;
+  margin:12px 0;
 }
+
 button{
-  border:0;border-radius:12px;padding:15px 22px;
-  font-size:17px;font-weight:bold;cursor:pointer;
+  border:0;
+  border-radius:12px;
+  padding:15px 22px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
 }
-.primary{background:#1264a3;color:white;width:100%}
+
+.primary{
+  background:#1264a3;
+  color:white;
+  width:100%;
+}
+
 .option{
-  display:block;width:100%;text-align:left;
-  background:#f1f5f9;color:#14283e;
-  border:2px solid #e1e8ef;margin:10px 0;
+  display:block;
+  width:100%;
+  text-align:right;
+  background:#f1f5f9;
+  color:#14283e;
+  border:2px solid #e1e8ef;
+  margin:10px 0;
+  line-height:1.7;
 }
-.option.selected{background:#dceeff;border-color:#1674b8}
-.option:disabled{cursor:default}
-.question{padding:20px 0;border-bottom:1px solid #ddd}
+
+.option.selected{
+  background:#dceeff;
+  border-color:#1674b8;
+  color:#123b5d;
+}
+
+.option:disabled{
+  cursor:default;
+  opacity:1;
+}
+
+.question{
+  padding:20px 0;
+  border-bottom:1px solid #ddd;
+}
+
 .badge{
-  display:inline-block;background:#e5eff9;color:#12558a;
-  padding:7px 13px;border-radius:20px;font-size:13px;
+  display:inline-block;
+  background:#e5eff9;
+  color:#12558a;
+  padding:7px 13px;
+  border-radius:20px;
+  font-size:13px;
 }
-.hidden{display:none}
-#result{text-align:center;padding:20px}
-.score{font-size:40px;color:#1264a3;font-weight:bold}
+
+.hidden{
+  display:none;
+}
+
+#result{
+  text-align:center;
+  padding:20px;
+}
+
+.score{
+  font-size:40px;
+  color:#1264a3;
+  font-weight:bold;
+  direction:ltr;
+}
+
+.footer{
+  margin-top:35px;
+  padding-top:20px;
+  border-top:1px solid #dce3ea;
+  text-align:center;
+  line-height:2;
+}
+
+.footer .teacher{
+  color:#123b5d;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.footer .designer{
+  color:#64748b;
+  font-size:16px;
+  font-weight:bold;
+}
+
+@media(max-width:500px){
+  body{padding:10px}
+  .container{
+    margin:15px auto;
+    padding:18px;
+  }
+  h1{font-size:25px}
+  .score{font-size:35px}
+}
 </style>
 </head>
+
 <body>
 
+<!-- صفحة البداية -->
+
 <div class="container" id="welcome">
+
   <h1>اختبار</h1>
+
   <div class="welcome">
     <h2>قبل ما تبدأ تحل</h2>
     <h2>صلّي على النبي ﷺ ❤️</h2>
     <p>أهلًا بيك، اكتب اسمك وابدأ الاختبار.</p>
   </div>
-  <input id="studentName" placeholder="اكتب اسمك بالكامل">
-  <button class="primary" onclick="startExam()">ابدأ الاختبار</button>
+
+  <input
+    id="studentName"
+    type="text"
+    placeholder="اكتب اسمك بالكامل"
+    maxlength="100"
+  >
+
+  <button class="primary" onclick="startExam()">
+    ابدأ الاختبار
+  </button>
+
 </div>
+
+
+<!-- صفحة الأسئلة -->
 
 <div class="container hidden" id="exam">
+
   <h1>اختبار Community Health Nursing</h1>
+
   <p id="studentLabel"></p>
-  <p><span class="badge">15 سؤالًا</span></p>
+
+  <p>
+    <span class="badge">15 سؤالًا</span>
+  </p>
+
   <div id="questions"></div>
-  <button class="primary" onclick="submitExam()">إنهاء الامتحان وعرض النتيجة</button>
+
+  <button class="primary" onclick="submitExam()">
+    إنهاء الامتحان وعرض النتيجة
+  </button>
+
 </div>
+
+
+<!-- صفحة النتيجة -->
 
 <div class="container hidden" id="result">
+
   <h1>نتيجة الامتحان</h1>
+
   <p id="resultName"></p>
+
   <div class="score" id="score"></div>
+
   <p id="percentage"></p>
+
   <p>تم تسليم الامتحان بنجاح ❤️</p>
+
+  <!-- أسماء الإعداد والتصميم في النهاية -->
+
+  <div class="footer">
+
+    <div class="teacher">
+      Omar Abdel-Tawab
+    </div>
+
+    <div class="designer">
+      تصميم Mohamed Mahmoud
+    </div>
+
+  </div>
+
 </div>
 
+
 <script>
+
+// الأسئلة الأصلية والإجابات الصحيحة
+
 const questions = [
-{level:"EASY",q:"What is Community Health Nursing according to ANA?",a:["Providing only hospital care for sick individuals","Promoting and protecting health of populations using nursing science","Giving only emergency care in ambulance services","Doing only private home nursing for rich people"],correct:1},
-{level:"EASY",q:"How is Community defined?",a:["Patients staying in same hospital ward together","Doctors working together in one medical center","People interacting with common interests and sense of belonging","Family members living in one single house only"],correct:2},
-{level:"EASY",q:"WHO definition of Health is:",a:["Only absence of physical disease and illness","Ability to work 8 hours daily without fatigue","Complete physical, mental, social well-being not just absence of disease","Having strong muscles and daily exercise routine"],correct:2},
-{level:"EASY",q:"Which is Primary Prevention?",a:["Regular mammogram screening for early breast cancer","Cardiac rehabilitation after heart attack recovery","Education about healthy habits and immunization against infection","Support group for patients with chronic diabetes"],correct:2},
-{level:"EASY",q:"Who checks quality and dispenses medications?",a:["Pathologist examining body fluids in laboratory","Radiologist specialized in CT scan and MRI imaging","Pharmacist responsible for storing and dispensing safe medications","Dietician determining nutritional needs and diet plans"],correct:2},
-{level:"MEDIUM",q:"Primary goal of Community Health Nursing?",a:["Increase hospital income by admitting more patients","Provide only curative care inside hospital wards","Promote health, prevent diseases, and reduce health disparities","Focus only on rare genetic disorders in children"],correct:2},
-{level:"MEDIUM",q:"Which factor says higher income is linked to better health?",a:["Low education linked to poor health and low confidence","Safe water and clean air contributing to good health","Income and social status linked to better health outcomes","Men and women suffering different diseases at ages"],correct:2},
-{level:"MEDIUM",q:"Aim of Secondary Prevention?",a:["Prevent disease before ever occurs by avoiding exposure","Soften impact of ongoing illness by long-term rehabilitation","Reduce impact of disease already occurred by early detection","Provide only health education without medical intervention"],correct:2},
-{level:"MEDIUM",q:"Role of Community Health Nurse?",a:["Perform CT scan and MRI imaging of internal organs","Provide antenatal, intra-natal, postnatal care for safe delivery","Check quality of food and nutritional needs daily","Provide home care suggestions and mental health support"],correct:1},
-{level:"MEDIUM",q:"Which is NOT a basic factor for good health?",a:["Close ties with family providing sense of safety","Taking antibiotics daily without medical prescription","Maintaining healthy diet promoting physiological well-being","Getting enough high quality restful sleep regularly"],correct:1},
-{level:"HARD",q:"Village diabetes screening to detect early cases is:",a:["Primary prevention by preventing hazard exposure","Tertiary prevention by managing long-term chronic conditions","Secondary prevention by detecting and treating disease early","No prevention, only administrative work without benefit"],correct:2},
-{level:"HARD",q:"Modern shift in Community Health Nursing is:",a:["From well to sick person and community to individual","From sick to well person and from individual to community focus","From prevention to cure and public to hospital care","From education to only surgery and intensive care"],correct:1},
-{level:"HARD",q:"Health services available to all without difference reflects:",a:["Proper records and reports being essential always","Professional relationship with etiquette and dignity","Realistic services based on available resources only","Principle of health equity and promoting health for all"],correct:3},
-{level:"HARD",q:"Stroke patient in vocational program to retrain for new job is:",a:["Primary prevention preventing disease before it occurs","Secondary prevention detecting disease in earliest stages","Primary prevention by education about healthy habits","Tertiary prevention improving function and quality of life"],correct:3},
-{level:"HARD",q:"Why blaming individuals for poor health is inappropriate?",a:["Individuals control all determinants of health by will","Genetics is the only factor determining health status","Health determined by social, economic, physical context beyond control","Health services alone determine health without social factors"],correct:2}
+
+{
+level:"EASY",
+q:"What is Community Health Nursing according to ANA?",
+a:[
+"Providing only hospital care for sick individuals",
+"Promoting and protecting health of populations using nursing science",
+"Giving only emergency care in ambulance services",
+"Doing only private home nursing for rich people"
+],
+correct:1
+},
+
+{
+level:"EASY",
+q:"How is Community defined?",
+a:[
+"Patients staying in same hospital ward together",
+"Doctors working together in one medical center",
+"People interacting with common interests and sense of belonging",
+"Family members living in one single house only"
+],
+correct:2
+},
+
+{
+level:"EASY",
+q:"WHO definition of Health is:",
+a:[
+"Only absence of physical disease and illness",
+"Ability to work 8 hours daily without fatigue",
+"Complete physical, mental, social well-being not just absence of disease",
+"Having strong muscles and daily exercise routine"
+],
+correct:2
+},
+
+{
+level:"EASY",
+q:"Which is Primary Prevention?",
+a:[
+"Regular mammogram screening for early breast cancer",
+"Cardiac rehabilitation after heart attack recovery",
+"Education about healthy habits and immunization against infection",
+"Support group for patients with chronic diabetes"
+],
+correct:2
+},
+
+{
+level:"EASY",
+q:"Who checks quality and dispenses medications?",
+a:[
+"Pathologist examining body fluids in laboratory",
+"Radiologist specialized in CT scan and MRI imaging",
+"Pharmacist responsible for storing and dispensing safe medications",
+"Dietician determining nutritional needs and diet plans"
+],
+correct:2
+},
+
+{
+level:"MEDIUM",
+q:"Primary goal of Community Health Nursing?",
+a:[
+"Increase hospital income by admitting more patients",
+"Provide only curative care inside hospital wards",
+"Promote health, prevent diseases, and reduce health disparities",
+"Focus only on rare genetic disorders in children"
+],
+correct:2
+},
+
+{
+level:"MEDIUM",
+q:"Which factor says higher income is linked to better health?",
+a:[
+"Low education linked to poor health and low confidence",
+"Safe water and clean air contributing to good health",
+"Income and social status linked to better health outcomes",
+"Men and women suffering different diseases at ages"
+],
+correct:2
+},
+
+{
+level:"MEDIUM",
+q:"Aim of Secondary Prevention?",
+a:[
+"Prevent disease before ever occurs by avoiding exposure",
+"Soften impact of ongoing illness by long-term rehabilitation",
+"Reduce impact of disease already occurred by early detection",
+"Provide only health education without medical intervention"
+],
+correct:2
+},
+
+{
+level:"MEDIUM",
+q:"Role of Community Health Nurse?",
+a:[
+"Perform CT scan and MRI imaging of internal organs",
+"Provide antenatal, intra-natal, postnatal care for safe delivery",
+"Check quality of food and nutritional needs daily",
+"Provide home care suggestions and mental health support"
+],
+correct:1
+},
+
+{
+level:"MEDIUM",
+q:"Which is NOT a basic factor for good health?",
+a:[
+"Close ties with family providing sense of safety",
+"Taking antibiotics daily without medical prescription",
+"Maintaining healthy diet promoting physiological well-being",
+"Getting enough high quality restful sleep regularly"
+],
+correct:1
+},
+
+{
+level:"HARD",
+q:"Village diabetes screening to detect early cases is:",
+a:[
+"Primary prevention by preventing hazard exposure",
+"Tertiary prevention by managing long-term chronic conditions",
+"Secondary prevention by detecting and treating disease early",
+"No prevention, only administrative work without benefit"
+],
+correct:2
+},
+
+{
+level:"HARD",
+q:"Modern shift in Community Health Nursing is:",
+a:[
+"From well to sick person and community to individual",
+"From sick to well person and from individual to community focus",
+"From prevention to cure and public to hospital care",
+"From education to only surgery and intensive care"
+],
+correct:1
+},
+
+{
+level:"HARD",
+q:"Health services available to all without difference reflects:",
+a:[
+"Proper records and reports being essential always",
+"Professional relationship with etiquette and dignity",
+"Realistic services based on available resources only",
+"Principle of health equity and promoting health for all"
+],
+correct:3
+},
+
+{
+level:"HARD",
+q:"Stroke patient in vocational program to retrain for new job is:",
+a:[
+"Primary prevention preventing disease before it occurs",
+"Secondary prevention detecting disease in earliest stages",
+"Primary prevention by education about healthy habits",
+"Tertiary prevention improving function and quality of life"
+],
+correct:3
+},
+
+{
+level:"HARD",
+q:"Why blaming individuals for poor health is inappropriate?",
+a:[
+"Individuals control all determinants of health by will",
+"Genetics is the only factor determining health status",
+"Health determined by social, economic, physical context beyond control",
+"Health services alone determine health without social factors"
+],
+correct:2
+}
+
 ];
 
-let student="";
-let answers={};
-let finished=false;
+
+// متغيرات الامتحان
+
+let student = "";
+let answers = {};
+let finished = false;
+
+// الاختيارات التي ستظهر للطالب بعد خلطها
+
+let displayedOptions = [];
+
+
+// خلط الاختيارات عشوائيًا
+
+function shuffleOptions(options, correctIndex){
+
+  // نحول الاختيارات إلى عناصر مرتبطة بالإجابة الصحيحة
+
+  let shuffled = options.map((text,index)=>({
+    text:text,
+    isCorrect:index === correctIndex
+  }));
+
+  // خوارزمية الخلط العشوائي
+
+  for(let i=shuffled.length-1;i>0;i--){
+
+    const j=Math.floor(Math.random()*(i+1));
+
+    [shuffled[i],shuffled[j]]=
+    [shuffled[j],shuffled[i]];
+
+  }
+
+  return shuffled;
+
+}
+
+
+// بدء الامتحان
 
 function startExam(){
+
   student=document.getElementById("studentName").value.trim();
-  if(!student){alert("اكتب اسمك الأول");return;}
-  document.getElementById("welcome").classList.add("hidden");
-  document.getElementById("exam").classList.remove("hidden");
-  document.getElementById("studentLabel").textContent="Student: "+student;
-  renderQuestions();
-}
 
-function renderQuestions(){
-  const box=document.getElementById("questions");
-  questions.forEach((item,i)=>{
-    const section=document.createElement("div");
-    section.className="question";
-    section.innerHTML=`<span class="badge">${item.level}</span>
-      <h3>${i+1}. ${item.q}</h3>`;
-    item.a.forEach((option,j)=>{
-      const btn=document.createElement("button");
-      btn.className="option";
-      btn.textContent=String.fromCharCode(65+j)+") "+option;
-      btn.onclick=()=>{
-        if(finished || answers[i]!==undefined)return;
-        answers[i]=j;
-        btn.classList.add("selected");
-        [...section.querySelectorAll(".option")].forEach(b=>b.disabled=true);
-      };
-      section.appendChild(btn);
-    });
-    box.appendChild(section);
-  });
-}
-
-function submitExam(){
-  if(finished)return;
-  if(Object.keys(answers).length!==questions.length){
-    alert("جاوب على كل الأسئلة قبل إنهاء الامتحان.");
+  if(!student){
+    alert("اكتب اسمك الأول");
     return;
   }
-  if(!confirm("متأكد إنك عايز تسلّم الامتحان؟"))return;
-  finished=true;
-  let score=0;
-  questions.forEach((q,i)=>{
-    if(answers[i]===q.correct)score++;
-  });
-  document.getElementById("exam").classList.add("hidden");
-  document.getElementById("result").classList.remove("hidden");
-  document.getElementById("resultName").textContent="الطالب: "+student;
-  document.getElementById("score").textContent=score+" / "+questions.length;
-  document.getElementById("percentage").textContent=
-    "النسبة المئوية: "+Math.round(score/questions.length*100)+"%";
+
+  document.getElementById("welcome").classList.add("hidden");
+
+  document.getElementById("exam").classList.remove("hidden");
+
+  document.getElementById("studentLabel").textContent=
+  "Student: "+student;
+
+  renderQuestions();
+
 }
+
+
+// عرض الأسئلة والاختيارات
+
+function renderQuestions(){
+
+  const box=document.getElementById("questions");
+
+  box.innerHTML="";
+
+  displayedOptions=[];
+
+  questions.forEach((item,i)=>{
+
+    // خلط اختيارات كل سؤال مع الحفاظ على الإجابة الصحيحة
+
+    const shuffled=shuffleOptions(item.a,item.correct);
+
+    displayedOptions.push(shuffled);
+
+    const section=document.createElement("div");
+
+    section.className="question";
+
+    const badge=document.createElement("span");
+
+    badge.className="badge";
+
+    badge.textContent=item.level;
+
+    section.appendChild(badge);
+
+    const heading=document.createElement("h3");
+
+    heading.textContent=(i+1)+". "+item.q;
+
+    section.appendChild(heading);
+
+    shuffled.forEach((option,j)=>{
+
+      const btn=document.createElement("button");
+
+      btn.className="option";
+
+      btn.textContent=
+      String.fromCharCode(65+j)+") "+option.text;
+
+      btn.onclick=()=>{
+
+        // منع تغيير الإجابة بعد الاختيار
+
+        if(finished || answers[i]!==undefined){
+          return;
+        }
+
+        answers[i]=j;
+
+        btn.classList.add("selected");
+
+        // تعطيل كل اختيارات السؤال بعد تحديد إجابة واحدة
+
+        const allButtons=section.querySelectorAll(".option");
+
+        allButtons.forEach(b=>{
+          b.disabled=true;
+        });
+
+      };
+
+      section.appendChild(btn);
+
+    });
+
+    box.appendChild(section);
+
+  });
+
+}
+
+
+// تسليم الامتحان
+
+function submitExam(){
+
+  if(finished){
+    return;
+  }
+
+  // التأكد من إجابة جميع الأسئلة
+
+  if(Object.keys(answers).length!==questions.length){
+
+    alert("جاوب على كل الأسئلة قبل إنهاء الامتحان.");
+
+    return;
+
+  }
+
+  if(!confirm("متأكد إنك عايز تسلّم الامتحان؟")){
+    return;
+  }
+
+  finished=true;
+
+  let score=0;
+
+  // حساب الدرجة حسب الاختيارات التي ظهرت للطالب
+
+  questions.forEach((q,i)=>{
+
+    const selectedIndex=answers[i];
+
+    const selectedOption=displayedOptions[i][selectedIndex];
+
+    if(selectedOption.isCorrect){
+      score++;
+    }
+
+  });
+
+
+  // إخفاء الامتحان وإظهار النتيجة
+
+  document.getElementById("exam").classList.add("hidden");
+
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("resultName").textContent=
+  "الطالب: "+student;
+
+  document.getElementById("score").textContent=
+  score+" / "+questions.length;
+
+  document.getElementById("percentage").textContent=
+  "النسبة المئوية: "+
+  Math.round(score/questions.length*100)+"%";
+
+}
+
 </script>
+
 </body>
   </html>
-  
+      
